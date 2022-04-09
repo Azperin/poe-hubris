@@ -2060,7 +2060,7 @@ var jewels = {
 			"https://cdn.discordapp.com/attachments/962240914665902120/962470996844089454/99460_11.png",
 			"https://cdn.discordapp.com/attachments/962240914665902120/962471036836806736/99460_12.png",
 			"https://cdn.discordapp.com/attachments/962240914665902120/962471037272997918/99460_13.png",
-			""
+			"https://cdn.discordapp.com/attachments/962240914665902120/962471037587558400/99460_14.png"
 		]
 	}
 };
