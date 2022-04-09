@@ -2046,7 +2046,7 @@ var jewels = {
 			]
 		],
 		"socketImgs": [
-			"",
+			"https://cdn.discordapp.com/attachments/962240914665902120/962470882306039828/99460_0.png",
 			"",
 			"",
 			"",
