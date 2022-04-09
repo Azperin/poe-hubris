@@ -1801,7 +1801,7 @@ var jewels = {
 			"https://cdn.discordapp.com/attachments/962240914665902120/962470188308119582/94640_10.png",
 			"https://cdn.discordapp.com/attachments/962240914665902120/962470188610113586/94640_11.png",
 			"https://cdn.discordapp.com/attachments/962240914665902120/962470844074958898/94640_12.png",
-			"",
+			"https://cdn.discordapp.com/attachments/962240914665902120/962470844385353819/94640_13.png",
 			""
 		]
 	},
