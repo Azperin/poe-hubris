@@ -61,7 +61,14 @@
 	
 	 #filter_seed {
 		color: black;
+	 }
+	 
+	 #socket-link {
+		padding: 3px;
+		width: 70px;
 	 };
+	 
+	 
 }
 </style>
 </head>
@@ -142,8 +149,10 @@
 	<div style="display: flex; justify-content: space-between;">
 		<input type="button" value="PREV" onClick="showSocket('prev')" />
 		<input type="button" value="FILTERS" onClick="toggleFilters()" />
-		<input type="button" value="NEXT" onClick="showSocket('next')"/></div>
+		<input type="button" value="NEXT" onClick="showSocket('next')"/>
+	</div>
 	<div id="corusel-counter" style="text-align: center;">0</div>
+	<div style="text-align: center;"><input id="socket-link" type="button" onclick="copyLink()" value="copy link" /></div>
 </div>
 <div class="filter-sockets-container">
 	<div>
@@ -220,6 +229,9 @@
 	let filterSkillsNodes = document.querySelectorAll('.filter-skill');
 	let result = [];
 	let currentResultIndex = -1;
+	
+	document.querySelector('#socket-link').style.display = 'none';
+	
 	hashCheck();
 	function hashCheck() {
 		if (!window.location.hash) return;
@@ -292,10 +304,12 @@
 			document.querySelector('.filter-skills-container').style.display = '';
 			document.querySelector('.filter-sockets-container').style.display = '';
 			document.querySelector('.filter-filler').style.display = '';
+			document.querySelector('#socket-link').style.display = 'none';
 		} else {
 			document.querySelector('.filter-skills-container').style.display = 'none';
 			document.querySelector('.filter-sockets-container').style.display = 'none';
 			document.querySelector('.filter-filler').style.display = 'none';
+			document.querySelector('#socket-link').style.display = '';
 		};		
 	};
 	
@@ -351,6 +365,16 @@
 			};	
 		} else {
 			window.location.hash = '';
+		};
+	};
+	
+	function copyLink() {
+		if (currentResultIndex >= 0) {
+			window.navigator.clipboard.writeText(`${window.location.origin}${window.location.pathname}#${result[currentResultIndex].seed}_${result[currentResultIndex].socket}`).then(() => {
+				let el = document.querySelector('#socket-link');
+				el.style.backgroundColor = 'green';
+				setTimeout(() => el.style.backgroundColor = '', 300);
+			}).catch(() => '');
 		};
 	};
 	
