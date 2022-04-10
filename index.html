@@ -58,12 +58,19 @@
 		min-height: 100%;
 		background-color: black;
 	}
+	
+	 #filter_seed {
+		color: black;
+	 };
 }
 </style>
 </head>
 <body>
 <div class="filter-filler"></div>
 <div class="filter-skills-container">
+	<div>
+		<input id="filter_seed" type="text" placeholder="coins number" />
+	</div>
 	<div>
 		<input id="filter_skill_8" data-val="40" data-skillidx="8" type="number" class="filter-skill" /><label for="filter_skill_8">Rarity of Items found</label>
 	</div>
@@ -205,30 +212,43 @@
 <script src="jewelsDB.js"></script>
 <script>
 	// test automation
+	
 	let resultElement = document.querySelector('.result');
+	let seedInputElement = document.getElementById('filter_seed');
 	let couruselCounter = document.getElementById('corusel-counter');
+	let filterSocketsNodes = document.querySelectorAll('.filter-socket');
+	let filterSkillsNodes = document.querySelectorAll('.filter-skill');
 	let result = [];
 	let currentResultIndex = -1;
-	document.querySelectorAll('.filter-socket').forEach(x => {
-		x.addEventListener('change', search);
-	});
-	document.querySelectorAll('.filter-skill').forEach(x => {
-		x.addEventListener('input', search);
-	});
-	search();
+	hashCheck();
+	function hashCheck() {
+		if (!window.location.hash) return;
+		let [ seed, ...sockets] = window.location.hash.split('_');
+		seed = seed.replaceAll(/[^0-9]/g, '');
+		seedInputElement.value = seed;
+		if (sockets && sockets.length === 1) {
+			filterSocketsNodes.forEach((e, i) => {
+				e.checked = false;
+			});
+			sockets[0].split('.').splice(0, 15).map(x => parseInt(x,10)).filter(x => Number.isInteger(x) && x >= 0 && x < 15).forEach((x, i) => {
+				filterSocketsNodes[parseInt(x, 10)].checked = true;
+			});
+		};
+	};
+	
 	function search() {
 		let socketsToCheck = [];
 		let skillsToCheck = [];
 		result = [];
 		
-		document.querySelectorAll('.filter-socket').forEach(x => {
+		filterSocketsNodes.forEach(x => {
 			if (x.checked) {
 				socketsToCheck.push(parseInt(x.dataset.fsocketid, 10));
 			};
 		});
 		if (socketsToCheck.length === 0) return;
 		
-		document.querySelectorAll('.filter-skill').forEach(x => {
+		filterSkillsNodes.forEach(x => {
 			let v = parseInt(x.value, 10);
 			skillsToCheck.push({
 				idx: parseInt(x.dataset.skillidx, 10),
@@ -239,6 +259,8 @@
 		skillsToCheck = skillsToCheck.filter(x => x.count > 0);
 		
 		Object.keys(jewels).forEach(jewelSeed => {
+			if (seedInputElement.value && jewelSeed !== seedInputElement.value) return;
+		
 			jewels[jewelSeed].socketSkills.forEach((socket, sockIdx) => {
 				if (!socketsToCheck.includes(sockIdx)) return;
 				let isPassed = skillsToCheck.every(x => {
@@ -260,7 +282,7 @@
 				
 			});
 		});
-		showSocket('next');
+		showSocket('next', true);
 	};
 	
 	function toggleFilters() {
@@ -276,7 +298,7 @@
 		};		
 	};
 	
-	function showSocket(e) {
+	function showSocket(e,b) {
 		if (result.length === 0) {
 			currentResultIndex = -1;
 			document.body.style.backgroundImage = '';
@@ -284,7 +306,9 @@
 			return;
 		};
 		let nextIndex;
-		if (e === 'next') {
+		if (b) {
+			nextIndex = 0;
+		} else if (e === 'next') {
 			nextIndex = currentResultIndex + 1;
 			if (!result[nextIndex]) {
 				nextIndex = 0;
@@ -299,6 +323,37 @@
 		couruselCounter.innerHTML = `${(nextIndex + 1)} of ${result.length}`;
 		document.body.style.backgroundImage = `url(${jewels[result[nextIndex].seed].socketImgs[result[nextIndex].socket]})`;
 	};
+	
+	filterSocketsNodes.forEach(x => {
+		x.addEventListener('change', () => {
+			modifyHash();
+			search();
+		});
+	});
+	
+	filterSkillsNodes.forEach(x => {
+		x.addEventListener('input', search);
+	});
+	
+	seedInputElement.addEventListener('input', () => {
+		modifyHash();
+		search();
+	});
+	
+	function modifyHash() {
+		if (seedInputElement.value) {
+			window.location.hash = seedInputElement.value;
+			let s = [...filterSocketsNodes].map((x,i) => (x.checked ? `${i}` : '')).filter(x => !!x);
+			if (s.length !== 0 && s.length < 15) {
+				window.location.hash += '_';
+				window.location.hash += s.reduce((a,x) => `${a}.${x}`, '').substring(1);
+			};	
+		} else {
+			window.location.hash = '';
+		};
+	};
+	
+	search();
 	
 </script>
 </html>
