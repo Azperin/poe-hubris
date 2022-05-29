@@ -1,0 +1,2 @@
+var divinedJewels = [];
+var jewelPrices = {};
