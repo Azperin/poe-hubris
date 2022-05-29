@@ -1,2 +1,4 @@
-var divinedJewels = [];
-var jewelPrices = {};
+var divinedJewels = [151660];
+var jewelPrices = {
+  '99260': 3,
+};
