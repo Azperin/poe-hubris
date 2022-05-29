@@ -153,6 +153,7 @@
 	</div>
 	<div id="corusel-counter" style="text-align: center;">0</div>
 	<div style="text-align: center;"><input id="socket-link" type="button" onclick="copyLink()" value="copy link" /></div>
+	<div style="text-align: center;" id="sell-info"></div>
 </div>
 <div class="filter-sockets-container">
 	<div>
@@ -247,6 +248,7 @@
 
 </body>
 <script src="jewelsDB.js"></script>
+<script src="sellInfo.js"></script>
 <script>
 	// test automation
 	
@@ -255,10 +257,12 @@
 	let couruselCounter = document.getElementById('corusel-counter');
 	let filterSocketsNodes = document.querySelectorAll('.filter-socket');
 	let filterSkillsNodes = document.querySelectorAll('.filter-skill');
+	let sellInfoEl = document.getElementById('sell-info');
 	let result = [];
 	let currentResultIndex = -1;
 	
 	document.querySelector('#socket-link').style.display = 'none';
+	sellInfoEl.style.display = 'none';
 	
 	hashCheck();
 	function hashCheck() {
@@ -333,11 +337,15 @@
 			document.querySelector('.filter-sockets-container').style.display = '';
 			document.querySelector('.filter-filler').style.display = '';
 			document.querySelector('#socket-link').style.display = 'none';
+			sellInfoEl.style.display = 'none';
+			
+			
 		} else {
 			document.querySelector('.filter-skills-container').style.display = 'none';
 			document.querySelector('.filter-sockets-container').style.display = 'none';
 			document.querySelector('.filter-filler').style.display = 'none';
 			document.querySelector('#socket-link').style.display = '';
+			sellInfoEl.style.display = '';
 		};		
 	};
 	
@@ -365,6 +373,7 @@
 		currentResultIndex = nextIndex;
 		couruselCounter.innerHTML = `${(nextIndex + 1)} of ${result.length}`;
 		document.body.style.backgroundImage = `url(${jewels[result[nextIndex].seed].socketImgs[result[nextIndex].socket]})`;
+		sellInfoEl.innerText = result[nextIndex].seed;
 	};
 	
 	filterSocketsNodes.forEach(x => {
