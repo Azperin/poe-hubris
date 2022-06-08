@@ -292,7 +292,7 @@
 			filterSocketsNodes.forEach((e, i) => {
 				e.checked = false;
 			});
-			sockets[0].split('.').splice(0, 15).map(x => parseInt(x,10)).filter(x => Number.isInteger(x) && x >= 0 && x < 15).forEach((x, i) => {
+			sockets[0].split('.').splice(0, 21).map(x => parseInt(x,10)).filter(x => Number.isInteger(x) && x >= 0 && x < 21).forEach((x, i) => {
 				filterSocketsNodes[parseInt(x, 10)].checked = true;
 			});
 		};
