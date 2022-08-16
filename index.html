@@ -52,9 +52,16 @@
 	
 	.nodebtn {
 		width: 200px;
-		margin: 5px 0 0 0;
+		margin: 8px 0 0 0;
 		padding: 4px 0px;
+		padding-left: 10px;
 		cursor: pointer;
+		background-color: #fff;
+		border: 1px solid black;
+		text-align: left;
+		font-weight: bold;
+		white-space: nowrap;
+		overflow: hidden;
 	}
 	.searchInput {
 		width: 90px;
@@ -125,13 +132,14 @@
 		padding: 2px;
 		white-space: nowrap;
 	}
-	#comboResult .combochoosed {
+	#comboResult .combochoosed, .cursocket {
 		background: #e0a3a3;
 		background: -moz-linear-gradient(left, #e0a3a3 0%, #ffffff 100%);
 		background: -webkit-linear-gradient(left, #e0a3a3 0%,#ffffff 100%);
 		background: linear-gradient(to right, #e0a3a3 0%,#ffffff 100%);
 		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e0a3a3', endColorstr='#ffffff',GradientType=1 );
 	}
+	
 	
 	
 </style>
@@ -142,27 +150,27 @@
 		<button onclick="toggleCombos()">@</button>
 		<input class="searchInput" id="seedinput" type="text" /><button class="searchBtn" onclick="seedSearch()">GO</button><br>
 		<input id="filtertoggle" type="checkbox" onchange="togglefilterswin()" /><label for="filtertoggle">Toggle Filters</label>
-		<button class="nodebtn" onclick="moveToNode('21984')">Witch RIGHT LCJ</button>
-		<button class="nodebtn" onclick="moveToNode('61419')">Witch CENTER</button>
-		<button class="nodebtn" onclick="moveToNode('7960')">Witch LEFT LCJ</button>
-		<button class="nodebtn" onclick="moveToNode('36634')">Witch LEFT BOTTOM</button>
-		<button class="nodebtn" onclick="moveToNode('41263')">Witch RIGHT BOTTOM</button>
-		<button class="nodebtn" onclick="moveToNode('61834')">Shadow RIGHT TOP</button>
-		<button class="nodebtn" onclick="moveToNode('33989')">Shadow LEFT CENTER</button>
-		<button class="nodebtn" onclick="moveToNode('32763')">Shadow RIGHT LJS</button>
-		<button class="nodebtn" onclick="moveToNode('60735')">Shadow RIGHT BOTTOM</button>
-		<button class="nodebtn" onclick="moveToNode('34483')">Duelist RIGHT TOP</button>
-		<button class="nodebtn" onclick="moveToNode('46882')">Duelist RIGHT BOTTOM LJS</button>
-		<button class="nodebtn" onclick="moveToNode('54127')">Duelist CENTER</button>
-		<button class="nodebtn" onclick="moveToNode('28475')">Duelist LEFT TOP</button>
-		<button class="nodebtn" onclick="moveToNode('2491')">Duelist LEFT BOTTOM LJS</button>
-		<button class="nodebtn" onclick="moveToNode('26725')">Templar LEFT BOTTOM</button>
-		<button class="nodebtn" onclick="moveToNode('55190')">Templar CENTER LEFT LJS</button>
-		<button class="nodebtn" onclick="moveToNode('26196')">Templar LEFT TOP</button>
-		<button class="nodebtn" onclick="moveToNode('33631')">Templar CENTER RIGHT</button>
-		<button class="nodebtn" onclick="moveToNode('6230')">Scion LEFT</button>
-		<button class="nodebtn" onclick="moveToNode('48768')">Scion RIGHT</button>
-		<button class="nodebtn" onclick="moveToNode('31683')">Scion BOTTOM</button>
+		<button class="nodebtn" onclick="moveToNode('21984', this)">Witch RIGHT LCJ</button>
+		<button class="nodebtn" onclick="moveToNode('61419', this)">Witch CENTER</button>
+		<button class="nodebtn" onclick="moveToNode('7960', this)">Witch LEFT LCJ</button>
+		<button class="nodebtn" onclick="moveToNode('36634', this)">Witch LEFT BOTTOM</button>
+		<button class="nodebtn" onclick="moveToNode('41263', this)">Witch RIGHT BOTTOM</button>
+		<button class="nodebtn" onclick="moveToNode('61834', this)">Shadow RIGHT TOP</button>
+		<button class="nodebtn" onclick="moveToNode('33989', this)">Shadow LEFT CENTER</button>
+		<button class="nodebtn" onclick="moveToNode('32763', this)">Shadow RIGHT LJS</button>
+		<button class="nodebtn" onclick="moveToNode('60735', this)">Shadow RIGHT BOTTOM</button>
+		<button class="nodebtn" onclick="moveToNode('34483', this)">Duelist RIGHT TOP</button>
+		<button class="nodebtn" onclick="moveToNode('46882', this)">Duelist RIGHT BOTTOM LJS</button>
+		<button class="nodebtn" onclick="moveToNode('54127', this)">Duelist CENTER</button>
+		<button class="nodebtn" onclick="moveToNode('28475', this)">Duelist LEFT TOP</button>
+		<button class="nodebtn" onclick="moveToNode('2491', this)">Duelist LEFT BOTTOM LJS</button>
+		<button class="nodebtn" onclick="moveToNode('26725', this)">Templar LEFT BOTTOM</button>
+		<button class="nodebtn" onclick="moveToNode('55190', this)">Templar CENTER LEFT LJS</button>
+		<button class="nodebtn" onclick="moveToNode('26196', this)">Templar LEFT TOP</button>
+		<button class="nodebtn" onclick="moveToNode('33631', this)">Templar CENTER RIGHT</button>
+		<button class="nodebtn" onclick="moveToNode('6230', this)">Scion LEFT</button>
+		<button class="nodebtn" onclick="moveToNode('48768', this)">Scion RIGHT</button>
+		<button class="nodebtn" onclick="moveToNode('31683', this)">Scion BOTTOM</button>
 	</div>
 	<div id="sidebarComboResult">
 		<button onclick="toggleCombos()">@</button>

@@ -173,8 +173,13 @@ function applyScale(scale) {
 	drawSkillTree();
 };
 
-function moveToNode(nodeId) {
+function moveToNode(nodeId, e) {
 	if (currentCenterNode == nodeId) return;
+	if (e) {
+		document.querySelectorAll('.cursocket').forEach((z) => z.classList.remove("cursocket"));
+		e.classList.add("cursocket");
+	};
+	
 	let x = passiveSkillTreeData.nodes[currentCenterNode].pos.x - passiveSkillTreeData.nodes[nodeId].pos.x;
 	let y = passiveSkillTreeData.nodes[currentCenterNode].pos.y - passiveSkillTreeData.nodes[nodeId].pos.y;
 	currentCenterNode = nodeId;
