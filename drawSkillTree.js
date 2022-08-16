@@ -173,15 +173,6 @@ function applyScale(scale) {
 	drawSkillTree();
 };
 
-
-// setTimeout(() => {
-	// moveToNode('21984');
-// }, 2000);
-
-// setTimeout(() => {
-	// moveToNode('61419');
-// }, 4000);
-
 function moveToNode(nodeId) {
 	if (currentCenterNode == nodeId) return;
 	let x = passiveSkillTreeData.nodes[currentCenterNode].pos.x - passiveSkillTreeData.nodes[nodeId].pos.x;
