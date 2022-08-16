@@ -88,8 +88,8 @@ function drawSkillTree() {
 		}, {});
 		
 		ctx.strokeStyle = '#FF0000';
-		ctx.lineWidth = .4;
-		ctx.setLineDash([25, 5]);
+		ctx.lineWidth = .5;
+		// ctx.setLineDash([25, 5]);
 		Object.keys(s).sort((a,b) => {
 			return s[b].length - s[a].length;
 		}).filter(x => {
@@ -122,7 +122,7 @@ function drawSkillTree() {
 				ctx.fill();
 			});
 		});
-		ctx.setLineDash([]);
+		// ctx.setLineDash([]);
 	};	
 };
 
