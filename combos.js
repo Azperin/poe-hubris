@@ -1,5 +1,5 @@
 let socketsNames = {
-	'21984': 'Witch RIGHT LCJ','61419': 'Witch CENTER','7960': 'Witch LEFT LCJ','36634': 'Witch LEFT BOTTOM','41263': 'Witch RIGHT BOTTOM','61834': 'Shadow RIGHT TOP','33989': 'Shadow LEFT CENTER','32763': 'Shadow RIGHT LJS','60735': 'Shadow RIGHT BOTTOM','34483': 'Duelist RIGHT TOP','46882': 'Duelist RIGHT BOTTOM LJS','54127': 'Duelist CENTER','28475': 'Duelist LEFT TOP','2491': 'Duelist LEFT BOTTOM LJS','26725': 'Templar LEFT BOTTOM','55190': 'Templar CENTER LEFT LJS','26196': 'Templar LEFT TOP','33631': 'Templar CENTER RIGHT','6230': 'Scion LEFT','48768': 'Scion RIGHT','31683': 'Scion BOTTOM'
+	'21984': 'Witch RIGHT LCJ','61419': 'Witch CENTER','7960': 'Witch LEFT LCJ','36634': 'Witch LEFT BOT','41263': 'Witch RIGHT BOT','61834': 'Shadow RIGHT TOP','33989': 'Shadow LEFT CENTER','32763': 'Shadow RIGHT LJS','60735': 'Shadow RIGHT BOT','34483': 'Duelist RIGHT TOP','46882': 'Duelist RIGHT BOT LJS','54127': 'Duelist CENTER','28475': 'Duelist LEFT TOP','2491': 'Duelist LEFT BOT LJS','26725': 'Templar LEFT BOT','55190': 'Templar CENTER LEFT LJS','26196': 'Templar LEFT TOP','33631': 'Templar CENTER RIGHT','6230': 'Scion LEFT','48768': 'Scion RIGHT','31683': 'Scion BOT'
 };
 let combo = localStorage.getItem('combos');
 if (combo) {
@@ -22,9 +22,13 @@ Object.keys(socketsNames).sort((a, b) => socketsNames[a].localeCompare(socketsNa
 
 renderComboFilters();
 
-function showComboSeed(seed, sock) {
+function showComboSeed(seed, sock, e) {
 	moveToNode(sock);
 	seedinput.value = seed;
+	
+	document.querySelectorAll('.combochoosed').forEach((z) => z.classList.remove("combochoosed"));
+	e.classList.add("combochoosed");
+	
 	seedSearch();
 };
 
@@ -99,7 +103,7 @@ function renderComboResult() {
 		comboResult.innerHTML += `<div>NO RESULT</div>`;
 	} else {
 		combo.result.forEach(x => {
-			comboResult.innerHTML += `<div onclick="showComboSeed(${x.seed},${x.socket})">Seed: ${x.seed} Socket: ${ x.socket }</div>`;
+			comboResult.innerHTML += `<div onclick="showComboSeed(${x.seed},${x.socket}, this)">Seed: ${x.seed}<br>Sock: ${ socketsNames[x.socket] }</div>`;
 		});
 	};
 	
