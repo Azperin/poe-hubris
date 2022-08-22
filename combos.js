@@ -125,3 +125,31 @@ function renderComboFilters() {
 	localStorage.setItem('combos', JSON.stringify(combo));
 	combo.sockets = new Set(combo.sockets);
 };
+
+function copyCombosResultForTrade() {
+	if (combo.result.length === 0) return;
+	let s = {"query":{"name":"Elegant Hubris","stats":[{"disabled":true,"filters":[],"type":"and"},{"filters":[],"type":"count","value":{"min":1}}],"status":{"option":"any"},"type":"Timeless Jewel"}};
+	
+	combo.result.forEach(x => {
+		let z = parseInt(x.seed, 10);
+		s.query.stats[1].filters.push({"disabled":false,"id":"explicit.pseudo_timeless_jewel_victario","value":{"max": z,"min": z}});
+		s.query.stats[1].filters.push({"disabled":false,"id":"explicit.pseudo_timeless_jewel_caspiro","value":{"max": z,"min": z}});
+		s.query.stats[1].filters.push({"disabled":false,"id":"explicit.pseudo_timeless_jewel_cadiro","value":{"max": z,"min": z}});
+		s.query.stats[1].filters.push({"disabled":false,"id":"explicit.pseudo_timeless_jewel_chitus","value":{"max": z,"min": z}});
+	});
+	
+	let copyText = `fetch('https://www.pathofexile.com/api/trade/search/Kalandra', {
+		method: 'POST', mode: 'cors', cache: 'no-cache', credentials: 'same-origin', headers: { 'Content-Type': 'application/json' }, body: '${JSON.stringify(s)}',
+	}).then(r => r.json()).then(e => {
+		console.log(e);
+		if (!e.id) return console.log(e);
+		location.href = 'https://www.pathofexile.com/trade/search/Kalandra/' + e.id;
+	}).catch(q => console.log(q));`
+	
+	navigator.clipboard.writeText(copyText).then(function() {
+		
+	}, function(err) {
+		
+	});
+	
+};

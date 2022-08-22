@@ -50,6 +50,10 @@
 		overflow-y: auto;
 	}
 	
+	#sidebarComboResult > button {
+		margin-right: 4px;
+	}
+	
 	.nodebtn {
 		width: 200px;
 		margin: 8px 0 0 0;
@@ -174,7 +178,7 @@
 	</div>
 	<div id="sidebarComboResult">
 		<button onclick="toggleCombos()">@</button>
-		<button onclick="toggleComboFilters()">Toggle Filters</button>
+		<button onclick="toggleComboFilters()">Toggle Filters</button><button onclick="copyCombosResultForTrade()">Copy</button>
 		<div id="comboResult"></div>
 	</div>
 	<div id="comboFilters">
