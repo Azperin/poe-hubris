@@ -98,7 +98,8 @@ function searchCombos() {
 
 function renderComboResult() {
 	comboResult.innerHTML = '';
-	combo.result.sort((a, b) => a.socket.localeCompare(b.socket));
+	// combo.result.sort((a, b) => a.socket.localeCompare(b.socket));
+	combo.result.sort((a, b) => a.seed - b.seed);
 	if (combo.result.length == 0) {
 		comboResult.innerHTML += `<div>NO RESULT</div>`;
 	} else {
