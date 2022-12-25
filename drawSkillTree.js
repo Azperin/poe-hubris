@@ -38,12 +38,12 @@ function drawSkillTree() {
 		// ctx.fillText(`${node.skill}`, node.pos.x - 15 , node.pos.y - 10);
 		ctx.fillStyle = 'black';
 		
-		if (node.isJewelSocket) {
-			ctx.strokeStyle = 'blue';
-			ctx.beginPath();
-			ctx.arc(node.pos.x, node.pos.y , 1800 * scale, 0, 2 * Math.PI);
-			ctx.stroke();
-		};
+		// if (node.isJewelSocket) {
+			// ctx.strokeStyle = 'blue';
+			// ctx.beginPath();
+			// ctx.arc(node.pos.x, node.pos.y , 1800 * scale, 0, 2 * Math.PI);
+			// ctx.stroke();
+		// };
 		ctx.strokeStyle = 'black';
 	});
 
