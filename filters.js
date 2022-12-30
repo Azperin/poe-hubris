@@ -1,5 +1,6 @@
 let filters = JSON.parse(localStorage.getItem('filters'));
-let comboMod = false;
+let sidebars = ['#sidebar', '#sidebarComboResult', '#sidebarBestResult'];
+let currentSidebarIdx = 0;
 if (!filters) {
 	filters = { min: 1, tIgnore: false, skills: {} };
 	Object.keys(legionjewelsinfo).forEach(x => {
@@ -54,18 +55,64 @@ function togglefilterswin() {
 	ignorefilters.style.display = (ignorefilters.style.display == 'none' || !ignorefilters.style.display) ? 'block' : 'none';
 };
 
-function toggleCombos() {
-	comboMod = !comboMod;
+function toggleBestFilters() {
+	bestFilters.style.display = (bestFilters.style.display == 'none' || !bestFilters.style.display) ? 'block' : 'none';
+};
+
+function toggleSidebar() {
+	currentSidebarIdx = sidebars[currentSidebarIdx + 1] ? (currentSidebarIdx + 1) : 0;
 	
-	if (comboMod) {
-		sidebar.style.display = 'none';
-		ignorefilters.style.display = 'none';
-		sidebarComboResult.style.display = 'block';
-		comboFilters.style.display = 'block';
-	} else {
-		sidebar.style.display = 'block';
-		ignorefilters.style.display = 'block';
-		sidebarComboResult.style.display = 'none';
-		comboFilters.style.display = 'none';
-	};	
+	document.querySelectorAll('.sidebars').forEach(el => {
+		el.style.display = 'none';
+	});
+	
+	document.querySelector(`${sidebars[currentSidebarIdx]}`).style.display = 'block';
+};
+
+function copySeedForTrade(seed) {
+	let s = {
+		"query": {
+			"name": "Elegant Hubris",
+			"stats": [  { "disabled": true, "filters": [], "type": "and" },
+				{
+					"filters": [
+						{ "disabled": false, "id": "explicit.pseudo_timeless_jewel_victario", "value": {
+						"max": seed,
+						"min": seed
+						} },
+						{ "disabled": false, "id": "explicit.pseudo_timeless_jewel_caspiro", "value": {
+						"max": seed,
+						"min": seed
+						}  },
+						{
+						"disabled": false, "id": "explicit.pseudo_timeless_jewel_cadiro", "value": {
+						"max": seed,
+						"min": seed
+						}
+						},
+						{
+						"disabled": false, "id": "explicit.pseudo_timeless_jewel_chitus", "value": {
+						"max": seed,
+						"min": seed
+						} },
+					],
+					"type": "count",
+					"value": {
+						"min": 1
+					}
+				}
+			],
+			"status": {
+				"option": "online"
+			},
+			"type": "Timeless Jewel"
+		}
+	};
+	
+	let copyText = encodeURI(`https://www.pathofexile.com/trade/search/Sanctum/?q=${JSON.stringify(s)}`);
+	navigator.clipboard.writeText(copyText).then(function() {
+		
+	}, function(err) {
+		
+	});
 };

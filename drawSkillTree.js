@@ -30,6 +30,39 @@ function drawSkillTree() {
 	ctx.restore();
 
 	ctx.fillStyle = 'black';
+	
+	
+	Object.values(passiveSkillTreeData.nodes).forEach((node, i) => {
+		if (node.isJewelSocket && node.skill == currentCenterNode) {
+			// ctx.strokeStyle = 'blue';
+			// ctx.beginPath();
+			// ctx.arc(node.pos.x, node.pos.y , 1800 * scale, 0, 2 * Math.PI);
+			// ctx.stroke();
+			
+			ctx.beginPath();
+			const gradient = ctx.createRadialGradient(node.pos.x, node.pos.y, 1700 * scale , node.pos.x, node.pos.y, 1820 * scale );
+			gradient.addColorStop(0.2, "#FFFFFF00");
+			gradient.addColorStop(0.9, "#CCCCCCFF");
+			gradient.addColorStop(0.7, "#000000");
+			gradient.addColorStop(1, "rgba(255, 255, 255, 0.0)");
+			ctx.fillStyle = gradient;
+			ctx.fillRect(node.pos.x - 5800 * scale, node.pos.y - 5800 * scale, 5800 * 2 * scale, 5800 * 2 * scale);
+		};
+	});
+	
+	Object.values(passiveSkillTreeData.nodes).forEach((node, i) => {
+		if (node.isKeystone) {
+			ctx.beginPath();
+			const gradient = ctx.createRadialGradient(node.pos.x, node.pos.y, 870 * scale , node.pos.x, node.pos.y, 970 * scale );
+			gradient.addColorStop(0.2, "rgba(66, 135, 245, 0.03)");
+			gradient.addColorStop(0.9, "rgba(66, 135, 245, 0.5)");
+			gradient.addColorStop(0.7, "rgba(0, 0, 0, 0.5)");
+			gradient.addColorStop(1, "rgba(255, 255, 255, 0)");
+			ctx.fillStyle = gradient;
+			ctx.fillRect(node.pos.x - 20000 * scale, node.pos.y - 20000 * scale, 20000 * 2 * scale, 20000 * 2 * scale);
+		};
+	});
+	
 	Object.values(passiveSkillTreeData.nodes).forEach((node, i) => {
 		ctx.beginPath();
 		ctx.fillStyle = node.inRadiusOfJewels.length > 0 ? 'red':'black';
@@ -37,15 +70,8 @@ function drawSkillTree() {
 		ctx.fill();
 		// ctx.fillText(`${node.skill}`, node.pos.x - 15 , node.pos.y - 10);
 		ctx.fillStyle = 'black';
-		
-		// if (node.isJewelSocket) {
-			// ctx.strokeStyle = 'blue';
-			// ctx.beginPath();
-			// ctx.arc(node.pos.x, node.pos.y , 1800 * scale, 0, 2 * Math.PI);
-			// ctx.stroke();
-		// };
-		ctx.strokeStyle = 'black';
 	});
+	
 
 	passiveSkillTreeData.edges.forEach(edge => {
 		if (edge.isArc) {
@@ -61,7 +87,6 @@ function drawSkillTree() {
 	});
 	
 	if (seedsInfo.hasOwnProperty(searchSeed) && seedsInfo[searchSeed].hasOwnProperty(currentCenterNode)) {
-		// отрисовываем результаты поиска
 		ctx.fillStyle = "white";
 		let rectX = Math.floor(passiveSkillTreeData.nodes[currentCenterNode].pos.x + ctx.canvas.width / 2) - 350;
 		let rectY = Math.floor(passiveSkillTreeData.nodes[currentCenterNode].pos.y - ctx.canvas.height / 2) - 2;
@@ -80,10 +105,13 @@ function drawSkillTree() {
 		ctx.strokeStyle = '#FF0000';
 		ctx.lineWidth = .5;
 		// ctx.setLineDash([25, 5]);
+		let edgesToHighlight = []; // в формате [ [123, 321], [321, 543] ... ]
+		let nodesPaths = [];
+		let pickedNotables = [];
 		Object.keys(s).sort((a,b) => {
 			return s[b].length - s[a].length;
 		}).filter(x => {
-			if (comboMod) {
+			if (currentSidebarIdx == 1) {
 				return combo.skills.hasOwnProperty(x);
 			} else {
 				if (filters.tIgnore) return true;
@@ -101,20 +129,57 @@ function drawSkillTree() {
 			ctx.fillText(`${legionjewelsinfo[x].name} (${s[x].length})`, textX, textY + 15);
 			
 			
-			s[x].forEach(q => {
+			s[x].forEach(showedNode => {
+				if (!filters.tIgnore) {
+					// если не стоит фулигнор, можно отрисовать пути
+					let path = BFS(showedNode, currentCenterNode);
+					path.forEach((x,i) => {
+						if (!path[i+1]) return;
+						edgesToHighlight.push([x, path[i+1] ]);
+					});
+				};
+				
 				ctx.beginPath();
 				ctx.moveTo( textX, textY );
-				ctx.lineTo( passiveSkillTreeData.nodes[q].pos.x, passiveSkillTreeData.nodes[q].pos.y );
+				ctx.lineTo( passiveSkillTreeData.nodes[showedNode].pos.x, passiveSkillTreeData.nodes[showedNode].pos.y );
 				ctx.stroke();
 				
 				ctx.beginPath();		
-				ctx.arc(passiveSkillTreeData.nodes[q].pos.x, passiveSkillTreeData.nodes[q].pos.y , 6, 0, 2 * Math.PI);
+				ctx.arc(passiveSkillTreeData.nodes[showedNode].pos.x, passiveSkillTreeData.nodes[showedNode].pos.y , 6, 0, 2 * Math.PI);
 				ctx.fill();
 			});
 		});
+		
+		// оптимизация edgesToHighlight ?
+		// console.log(nodesPaths);		
+		
+		let uniqTester = new Set([]);
+		ctx.strokeStyle = 'green';
+		ctx.lineWidth = 2;
+		passiveSkillTreeData.edges.forEach(edge => {
+			edgesToHighlight = edgesToHighlight.filter((highEdges, i) => {
+				uniqTester.clear();
+				uniqTester.add(`${edge.nodes[0]}`).add(`${edge.nodes[1]}`).add(`${highEdges[0]}`).add(`${highEdges[1]}`);
+				
+				if (uniqTester.size === 2) {
+					if (edge.isArc) {
+						ctx.beginPath();
+						ctx.arc(...edge.arc);
+						ctx.stroke();
+					} else {
+						ctx.beginPath();
+						ctx.moveTo( ...edge.moveTo );
+						ctx.lineTo( ...edge.lineTo );
+						ctx.stroke();
+					};
+					return false;
+				} else {
+					return true;
+				};
+			});
+		});
 		// ctx.setLineDash([]);
-	};	
-	
+	};
 	
 };
 
@@ -180,7 +245,6 @@ function seedSearch(e) {
 		s = seedinput.value.replaceAll(/[^0-9]/gm, '');
 	};
 	
-	console.log(s);
 	if (seedsInfo.hasOwnProperty(s)) {
 		searchSeed = s;
 		seedinput.value = s;
@@ -190,5 +254,28 @@ function seedSearch(e) {
 	};
 	
 	drawSkillTree();
+};
+
+
+function BFS(rootNode, endNode) {
+	// здесь просто самая короткая дистанция, без учета уже взятых нодов
+	rootNode = `${rootNode}`;
+	endNode = `${endNode}`;
+	let queue = [];
+  	let paths = [];
+	let visitedNodes = [];
+	paths.push([rootNode]);
+
+	while (paths.length > 0) {
+		let path = paths.shift();
+		let currentNode = path.at(-1);
+		
+		if (currentNode === endNode) return path;
+		visitedNodes.push(currentNode);
+		
+		passiveSkillTreeData.nodes[currentNode].conns.filter(x => !visitedNodes.includes(x)).forEach(x => {
+			paths.push([...path, x]);
+		});
+	};
 };
 

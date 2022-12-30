@@ -23,6 +23,7 @@ Object.keys(socketsNames).sort((a, b) => socketsNames[a].localeCompare(socketsNa
 renderComboFilters();
 
 function showComboSeed(seed, sock, e) {
+	copySeedForTrade(seed);
 	moveToNode(sock);
 	seedinput.value = seed;
 	
@@ -68,7 +69,7 @@ function delComboSkillFilter(e) {
 
 function searchCombos() {
 	combo.result = [];
-	let resLimit = 80;
+	let resLimit = 200;
 	Object.keys(seedsInfo).forEach(seed => {
 		if (combo.result.length > resLimit) return;
 		Object.keys(seedsInfo[seed]).forEach(socket => {

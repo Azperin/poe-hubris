@@ -10,9 +10,9 @@
 </head>
 <body>
 	<canvas width="1" height="1" id="treeCanvas"></canvas>
-	<div id="sidebar">
-		<button onclick="toggleCombos()">@</button>
-		<input class="searchInput" id="seedinput" type="text" /><button class="searchBtn" onclick="seedSearch()">GO</button><br>
+	<div id="sidebar" class="sidebars">
+		<button onclick="toggleSidebar()">@</button>
+		<input class="searchInput" id="seedinput" type="text" /><button class="searchBtn" onclick="seedSearch()">DRAW</button><br>
 		<button id="filtertoggle" onclick="togglefilterswin()">Toggle Filters</button>
 		<button class="nodebtn" onclick="moveToNode('21984', this)">Witch RIGHT LCJ</button>
 		<button class="nodebtn" onclick="moveToNode('61419', this)">Witch CENTER</button>
@@ -36,12 +36,15 @@
 		<button class="nodebtn" onclick="moveToNode('48768', this)">Scion RIGHT</button>
 		<button class="nodebtn" onclick="moveToNode('31683', this)">Scion BOTTOM</button>
 	</div>
-	<div id="sidebarComboResult">
-		<button onclick="toggleCombos()">@</button>
-		<button onclick="toggleComboFilters()">Toggle Filters</button><button onclick="copyCombosResultForTrade()">Copy</button>
+	<div id="ignorefilters" class="sidebars">
+		<table class="filtertable"></table> 
+	</div>
+	<div id="sidebarComboResult" class="sidebars">
+		<button onclick="toggleSidebar()">@</button>
+		<button onclick="toggleComboFilters()">Combo Filters</button><button onclick="copyCombosResultForTrade()">Copy</button>
 		<div id="comboResult"></div>
 	</div>
-	<div id="comboFilters">
+	<div id="comboFilters" class="sidebars">
 		<div><button onclick="searchCombos()">SEARCH</button></div>
 	
 		<select id="comboSocketsList"></select><button onclick="addComboSocketFilter()">add</button><button onclick="addAllSockets()">add ALL</button> 
@@ -53,9 +56,19 @@
 		<div id="comboSkillsFilterList"></div>
 	</div>
 	
-	<div id="ignorefilters">
-		<table class="filtertable"></table> 
+	<div id="sidebarBestResult" class="sidebars">
+		<button onclick="toggleSidebar()">@</button>
+		<button onclick="toggleBestFilters()">Best Filters</button>
+		<div id="bestResult">&nbsp;</div>
 	</div>
+	<div id="bestFilters" class="sidebars">
+		<div><button onclick="findBest()">SEARCH BEST</button></div>
+		<input type="text" id="bestMinIncreased" value="600"/><label for="bestMinIncreased">Min Increased Damage</label>
+		<div id="bestWeights">&nbsp;</div>
+		<div id="bestSocketsFilter">&nbsp;</div>
+	</div>
+	
+	
 	
 </body>
 <script src="htmllegionjewelsinfo.js"></script>
@@ -63,5 +76,6 @@
 <script src="normalizedPassiveTree.js"></script>
 <script src="filters.js"></script>
 <script src="combos.js"></script>
+<script src="findBest.js"></script>
 <script src="drawSkillTree.js"></script>
 </html>
