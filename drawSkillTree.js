@@ -32,13 +32,9 @@ function drawSkillTree() {
 	ctx.fillStyle = 'black';
 	
 	
+	// draw circle around socket node to show jewel radius
 	Object.values(passiveSkillTreeData.nodes).forEach((node, i) => {
 		if (node.isJewelSocket && node.skill == currentCenterNode) {
-			// ctx.strokeStyle = 'blue';
-			// ctx.beginPath();
-			// ctx.arc(node.pos.x, node.pos.y , 1800 * scale, 0, 2 * Math.PI);
-			// ctx.stroke();
-			
 			ctx.beginPath();
 			const gradient = ctx.createRadialGradient(node.pos.x, node.pos.y, 1700 * scale , node.pos.x, node.pos.y, 1820 * scale );
 			gradient.addColorStop(0.2, "#FFFFFF00");
@@ -50,6 +46,7 @@ function drawSkillTree() {
 		};
 	});
 	
+	// draw circle around keystone node to show Impossible escape
 	Object.values(passiveSkillTreeData.nodes).forEach((node, i) => {
 		if (node.isKeystone) {
 			ctx.beginPath();
@@ -63,14 +60,14 @@ function drawSkillTree() {
 		};
 	});
 	
-	Object.values(passiveSkillTreeData.nodes).forEach((node, i) => {
-		ctx.beginPath();
-		ctx.fillStyle = node.inRadiusOfJewels.length > 0 ? 'red':'black';
-		ctx.arc(node.pos.x, node.pos.y , 2, 0, 2 * Math.PI);
-		ctx.fill();
+	// Object.values(passiveSkillTreeData.nodes).forEach((node, i) => {
+		// ctx.beginPath();
+		// ctx.fillStyle = node.inRadiusOfJewels.length > 0 ? 'red':'black';
+		// ctx.arc(node.pos.x, node.pos.y , 2, 0, 2 * Math.PI);
+		// ctx.fill();
 		// ctx.fillText(`${node.skill}`, node.pos.x - 15 , node.pos.y - 10);
-		ctx.fillStyle = 'black';
-	});
+		// ctx.fillStyle = 'black';
+	// });
 	
 
 	passiveSkillTreeData.edges.forEach(edge => {
@@ -86,6 +83,7 @@ function drawSkillTree() {
 		};
 	});
 	
+	// right sidebar
 	if (seedsInfo.hasOwnProperty(searchSeed) && seedsInfo[searchSeed].hasOwnProperty(currentCenterNode)) {
 		ctx.fillStyle = "white";
 		let rectX = Math.floor(passiveSkillTreeData.nodes[currentCenterNode].pos.x + ctx.canvas.width / 2) - 350;
