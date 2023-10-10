@@ -23,9 +23,18 @@ body {
 	justify-content: center;
 }
 
-.wrapper .users {
-	background-color: red;
-	flex-grow: 1;
+.randomizer-controls {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 10px 0px;
+	padding: 5px;
+}
+
+.randomizer-controls button {
+	padding: 20px;
+	font-size: 30px;
 }
 
 .accendancy-randomizer {
@@ -36,7 +45,7 @@ body {
 	background-position: center;
 	position: relative;
 	overflow: hidden;
-	margin: 100px;
+	margin: 50px;
 }
 
 .accendancy-randomizer img {

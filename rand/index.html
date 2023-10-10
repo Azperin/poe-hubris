@@ -11,6 +11,10 @@
 </head>
 <body>
 <div class="wrapper">
+	<div class="randomizer-controls">
+		<button onclick="createRandom()">Random Accendancy</button>
+	</div>
+	
 	<div class="accendancy-randomizer"></div>
 </div>
 <script>
@@ -26,12 +30,16 @@ let ascendencies = [
 	'https://www.poewiki.net/images/thumb/1/1c/Ascendancy_skill_tree_Gladiator.PNG/600px-Ascendancy_skill_tree_Gladiator.PNG',
 	'https://www.poewiki.net/images/thumb/4/48/Ascendancy_skill_tree_Slayer.PNG/600px-Ascendancy_skill_tree_Slayer.PNG',
 ];
-createRandom();
-
 
 function createRandom() {
 	let randomizerEl = document.querySelector('.accendancy-randomizer');
-	randomizerEl.innerHTML = '';
+	
+	// clear previous run
+	randomizerEl.querySelectorAll('img').forEach(el => {
+		el.remove();
+	});
+	randomizerEl.classList.remove("pulse");
+	
 	let queue = [];
 	let randIndex = 0;
 	
@@ -60,6 +68,8 @@ function createRandom() {
 		i--;
 	}, 250);
 };
+
+
 
 </script>
 </body>
