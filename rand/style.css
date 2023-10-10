@@ -1,66 +1,73 @@
 * {
-	box-sizing: border-box;
-	margin: 0px;
-	padding: 0px;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 body {
-	min-width: 100vw;
-	min-height: 100vh;
-	background-color: #002b40;
-}
-
-.wrapper > div {
-	
+    min-width: 100vw;
+    min-height: 100vh;
+    background-color: #002b40;
 }
 
 .wrapper {
-	max-width: 1300px;
-	margin: 0 auto;
-	display: flex;
-	flex-wrap: wrap;
-	align-items: center;
-	justify-content: center;
+    max-width: 1300px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
 }
 
 .randomizer-controls {
-	width: 100%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	margin: 10px 0px;
-	padding: 5px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 0;
+    padding: 5px;
 }
 
 .randomizer-controls button {
-	padding: 20px;
-	font-size: 30px;
+    padding: 20px;
+    font-size: 30px;
 }
 
-.accendancy-randomizer {
-	width: 500px;
-	height: 500px;
-	border-radius: 50%;
-	background-size: cover;
-	background-position: center;
-	position: relative;
-	overflow: hidden;
-	margin: 50px;
+.ascendancy-randomizer {
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    overflow: hidden;
+    margin: 50px;
 }
 
-.accendancy-randomizer img {
-	position: absolute;
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-	width: 500px;
-	height: 500px;
-	transition: .7s;
+.ascendancy-randomizer img {
+    position: absolute;
+    display: block;
+    margin: 0 auto;
+    width: 500px;
+    height: 500px;
+    transition: 0.7s;
 }
 
 .pulse {
-	transition: .1s;
 	-webkit-box-shadow: 0px 0px 16px 20px rgba(15, 101, 157, 0.2);
 	-moz-box-shadow: 0px 0px 16px 20px rgba(15, 101, 157, 0.2);
 	box-shadow: 0px 0px 16px 20px rgba(15, 101, 157, 0.2);
+	animation: pulseAnimation 1s infinite;
+}
+
+@keyframes pulseAnimation {
+    0% {
+        box-shadow: 0 0 16px 20px rgba(15, 101, 157, 0.2);
+    }
+    50% {
+        box-shadow: 0 0 16px 25px rgba(15, 101, 157, 0.4);
+    }
+    100% {
+        box-shadow: 0 0 16px 20px rgba(15, 101, 157, 0.2);
+    }
 }
