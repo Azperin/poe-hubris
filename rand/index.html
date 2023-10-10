@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>rand</title>
+<link rel="stylesheet" href="style.css">
+<link rel="preload" as="image" href="https://www.poewiki.net/images/thumb/c/c2/Ascendancy_skill_tree_Elementalist.png/600px-Ascendancy_skill_tree_Elementalist.png">
+<script src="script.js" async></script>
+</head>
+<body>
+<div class="wrapper">
+	<div class="accendancy-randomizer"></div>
+</div>
+<script>
+let ascendencies = [
+	'https://www.poewiki.net/images/thumb/c/c2/Ascendancy_skill_tree_Elementalist.png/600px-Ascendancy_skill_tree_Elementalist.png',
+	'https://www.poewiki.net/images/thumb/4/42/Ascendancy_skill_tree_Necromancer.PNG/600px-Ascendancy_skill_tree_Necromancer.PNG',
+	'https://www.poewiki.net/images/thumb/b/b9/Ascendancy_skill_tree_Occultist.png/600px-Ascendancy_skill_tree_Occultist.png',
+	'https://www.poewiki.net/images/thumb/b/b9/Ascendancy_skill_tree_Occultist.png/600px-Ascendancy_skill_tree_Occultist.png',
+	'https://www.poewiki.net/images/4/41/Ascendancy_skill_tree_Juggernaut_3.19.png',
+	'https://www.poewiki.net/images/c/c3/Ascendancy_skill_tree_Berserker_3.14.png',
+	'https://www.poewiki.net/images/thumb/9/9b/Ascendancy_skill_tree_Chieftain.png/600px-Ascendancy_skill_tree_Chieftain.png',
+	'https://www.poewiki.net/images/thumb/d/d7/Ascendancy_skill_tree_Champion.png/600px-Ascendancy_skill_tree_Champion.png',
+	'https://www.poewiki.net/images/thumb/1/1c/Ascendancy_skill_tree_Gladiator.PNG/600px-Ascendancy_skill_tree_Gladiator.PNG',
+	'https://www.poewiki.net/images/thumb/4/48/Ascendancy_skill_tree_Slayer.PNG/600px-Ascendancy_skill_tree_Slayer.PNG',
+];
+createRandom();
+
+
+function createRandom() {
+	let randomizerEl = document.querySelector('.accendancy-randomizer');
+	randomizerEl.innerHTML = '';
+	let queue = [];
+	let randIndex = 0;
+	
+	while(queue.length < 30) {
+		randIndex = Math.floor(Math.random() * ascendencies.length);
+		if (ascendencies[randIndex] !== queue.at(-1)) {
+			queue.push(ascendencies[randIndex]);
+		};
+	};
+	
+	queue.forEach((x,i) => {
+		let img = document.createElement('img');
+		img.src = x;
+		randomizerEl.appendChild(img);
+	});
+	
+	let s = [...randomizerEl.querySelectorAll('img')];
+	let i = s.length - 1;
+	
+	let interval = setInterval(() => {
+		if (i === 0) {
+			randomizerEl.classList.add("pulse");
+			return clearInterval(interval);
+		};
+		s[i].style.opacity = 0;
+		i--;
+	}, 250);
+};
+
+</script>
+</body>
+</html>
