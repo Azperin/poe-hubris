@@ -4,47 +4,96 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Random Ascendancy</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Nunito:wght@400;700&display=swap"/>
 <link rel="stylesheet" href="style.css">
+<link rel="preload" as="image" href="https://www.poewiki.net/images/thumb/c/c2/Ascendancy_skill_tree_Elementalist.png/600px-Ascendancy_skill_tree_Elementalist.png"> 
+<link rel="preload" as="image" href="https://www.poewiki.net/images/thumb/4/42/Ascendancy_skill_tree_Necromancer.PNG/600px-Ascendancy_skill_tree_Necromancer.PNG"> 
+<link rel="preload" as="image" href="https://www.poewiki.net/images/thumb/b/b9/Ascendancy_skill_tree_Occultist.png/600px-Ascendancy_skill_tree_Occultist.png">
+<link rel="preload" as="image" href="https://www.poewiki.net/images/thumb/9/9b/Ascendancy_skill_tree_Chieftain.png/600px-Ascendancy_skill_tree_Chieftain.png">
+<link rel="preload" as="image" href="https://www.poewiki.net/images/thumb/d/d7/Ascendancy_skill_tree_Champion.png/600px-Ascendancy_skill_tree_Champion.png"> 
+<link rel="preload" as="image" href="https://www.poewiki.net/images/thumb/1/1c/Ascendancy_skill_tree_Gladiator.PNG/600px-Ascendancy_skill_tree_Gladiator.PNG"> 
+<link rel="preload" as="image" href="https://www.poewiki.net/images/thumb/4/48/Ascendancy_skill_tree_Slayer.PNG/600px-Ascendancy_skill_tree_Slayer.PNG"> 
+<link rel="preload" as="image" href="https://www.poewiki.net/images/thumb/a/ae/Ascendancy_skill_tree_Guardian.png/600px-Ascendancy_skill_tree_Guardian.png">
+<link rel="preload" as="image" href="https://www.poewiki.net/images/thumb/b/b6/Ascendancy_skill_tree_Hierophant.PNG/600px-Ascendancy_skill_tree_Hierophant.PNG">
+<link rel="preload" as="image" href="https://www.poewiki.net/images/thumb/d/d8/Ascendancy_skill_tree_Inquisitor.PNG/600px-Ascendancy_skill_tree_Inquisitor.PNG">
 </head>
 <body>
+	<div class="right-gradient"></div>
+	<div class="left-gradient"></div>
     <div class="wrapper">
-        <div class="randomizer-controls">
-            <button onclick="createRandom()">Random Ascendancy</button>
-            <button onclick="skipAnimation()">Skip Animation</button>
-        </div>
-        
-        <div class="ascendancy-randomizer">
-            <!-- Шаблон для изображений -->
-            <template id="img-template">
-                <img src="" alt="Random Ascendancy">
-            </template>
-        </div>
+		<nav>
+			<header>
+				<div class="logo"><img src="https://i.imgur.com/KSmZysd.png"  /></div>
+				<div>Ascendancy Randomator<br><span style="font-size: .8rem; opacity: .4;">ну или чтото типа того</span></div>
+				<div style="flex-grow: 1"></div>
+				<div><img src="https://www.poewiki.net/w/images/8/8c/Veiled_prefix_06.gif" /></div>
+			</header>
+		</nav>
+		
+		<main>
+			<aside>
+				<div class="randomizer-controls">
+					<button onclick="createRandom()">Randomize Ascendancy</button><br><br>
+					
+					<input id="skip-animation" type="checkbox" /><label for="skip-animation">  Skip Animation</label>
+					
+				</div>
+			</aside>
+			
+			<section>
+				  <div class="ascendancy-randomizer">
+					<!-- Шаблон для изображений -->
+					<template id="queue-item-template">
+						<div class="queue-item"></div>
+					</template>
+				</div>
+			</section>
+		</main>
+        <footer>
+			<header>
+				<div><img src="https://paygame.ru/_next/static/images/tg-acf339755aaffc4f4db07e2da09d1da5.svg" /></div>
+				<div><img src="https://paygame.ru/_next/static/images/vk-92ee205129fef4e927adb18823868943.svg" /></div>
+				<div><img src="https://paygame.ru/_next/static/images/dscrd-7b12b089c931d850051e2a4821e9f22b.svg" /></div>
+				<div style="flex-grow: 1"></div>
+			</header>
+		</footer>
     </div>
     <script>
         const ascendancies = [
             'https://www.poewiki.net/images/thumb/c/c2/Ascendancy_skill_tree_Elementalist.png/600px-Ascendancy_skill_tree_Elementalist.png',
             'https://www.poewiki.net/images/thumb/4/42/Ascendancy_skill_tree_Necromancer.PNG/600px-Ascendancy_skill_tree_Necromancer.PNG',
             'https://www.poewiki.net/images/thumb/b/b9/Ascendancy_skill_tree_Occultist.png/600px-Ascendancy_skill_tree_Occultist.png',
-            'https://www.poewiki.net/images/c/c3/Ascendancy_skill_tree_Berserker_3.14.png',
             'https://www.poewiki.net/images/thumb/9/9b/Ascendancy_skill_tree_Chieftain.png/600px-Ascendancy_skill_tree_Chieftain.png',
             'https://www.poewiki.net/images/thumb/d/d7/Ascendancy_skill_tree_Champion.png/600px-Ascendancy_skill_tree_Champion.png',
             'https://www.poewiki.net/images/thumb/1/1c/Ascendancy_skill_tree_Gladiator.PNG/600px-Ascendancy_skill_tree_Gladiator.PNG',
             'https://www.poewiki.net/images/thumb/4/48/Ascendancy_skill_tree_Slayer.PNG/600px-Ascendancy_skill_tree_Slayer.PNG',
+			'https://www.poewiki.net/images/thumb/a/ae/Ascendancy_skill_tree_Guardian.png/600px-Ascendancy_skill_tree_Guardian.png',
+			'https://www.poewiki.net/images/thumb/b/b6/Ascendancy_skill_tree_Hierophant.PNG/600px-Ascendancy_skill_tree_Hierophant.PNG',
+			'https://www.poewiki.net/images/thumb/d/d8/Ascendancy_skill_tree_Inquisitor.PNG/600px-Ascendancy_skill_tree_Inquisitor.PNG',
         ];
 
         const RANDOMIZER_ELEMENT = document.querySelector('.ascendancy-randomizer');
         const ITERATIONS = 30;
-        const imgTemplate = document.getElementById('img-template');
+        const ITEM_TEMPLATE_ELEMENT = document.getElementById('queue-item-template');
+		const SKIP_ANIMATION_CHECKBOX = document.getElementById('skip-animation');
 
         let interval;
 
         function createRandom() {
             // Clear previous run
             RANDOMIZER_ELEMENT.innerHTML = '';
-            RANDOMIZER_ELEMENT.classList.remove('pulse');
+			 let randIndex = Math.floor(Math.random() * ascendancies.length);
+			
+			if (SKIP_ANIMATION_CHECKBOX.checked) {
+				const el = document.importNode(ITEM_TEMPLATE_ELEMENT.content, true);
+				el.querySelector('div').style.backgroundImage = `url('${ ascendancies[randIndex] }')`;
+				RANDOMIZER_ELEMENT.appendChild(el);
+				return;
+			};
+			
 
             const queue = [];
-            let randIndex = 0;
+           
 
             while (queue.length < ITERATIONS) {
                 randIndex = Math.floor(Math.random() * ascendancies.length);
@@ -54,17 +103,16 @@
             };
 
             queue.forEach((imgSrc, i) => {
-                const img = document.importNode(imgTemplate.content, true);
-                img.querySelector('img').src = imgSrc;
-                RANDOMIZER_ELEMENT.appendChild(img);
+                const el = document.importNode(ITEM_TEMPLATE_ELEMENT.content, true);
+                el.querySelector('div').style.backgroundImage = `url('${ imgSrc }')`;
+                RANDOMIZER_ELEMENT.appendChild(el);
             });
 
-            const images = [...RANDOMIZER_ELEMENT.querySelectorAll('img')];
+            const images = [...RANDOMIZER_ELEMENT.querySelectorAll('div')];
             let index = images.length - 1;
 
             interval = setInterval(() => {
                 if (index === 0) {
-                    RANDOMIZER_ELEMENT.classList.add('pulse');
                     clearInterval(interval);
                 } else {
                     images[index].style.opacity = 0;
@@ -75,8 +123,6 @@
 
         function skipAnimation() {
 			clearInterval(interval);
-			RANDOMIZER_ELEMENT.classList.add('pulse');
-			
 			const images = [...RANDOMIZER_ELEMENT.querySelectorAll('img')];
 			images.forEach((img, i) => {
 				if (i === 0) {
