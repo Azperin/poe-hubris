@@ -1,0 +1,3 @@
+[submodule "docs/skilltree-export"]
+	path = docs/skilltree-export
+	url = git@github.com:grindinggear/skilltree-export.git
