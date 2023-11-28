@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="Cache-Control" content="no-cache" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<link rel="stylesheet" href="styles.css">
+<title>Poe Timeless</title>
+</head>
+<body>
+	<canvas width="1" height="1" id="treeCanvas"></canvas>
+	<div id="sidebar" class="sidebars">
+		<button onclick="toggleSidebar()">@</button>
+		<input class="searchInput" id="seedinput" type="text" /><button class="searchBtn" onclick="seedSearch()">DRAW</button><br>
+		<button id="filtertoggle" onclick="togglefilterswin()">Toggle Filters</button>
+		<button class="nodebtn" onclick="moveToNode('21984', this)">Witch RIGHT LCJ</button>
+		<button class="nodebtn" onclick="moveToNode('61419', this)">Witch CENTER</button>
+		<button class="nodebtn" onclick="moveToNode('7960', this)">Witch LEFT LCJ</button>
+		<button class="nodebtn" onclick="moveToNode('36634', this)">Witch LEFT BOTTOM</button>
+		<button class="nodebtn" onclick="moveToNode('41263', this)">Witch RIGHT BOTTOM</button>
+		<button class="nodebtn" onclick="moveToNode('61834', this)">Shadow RIGHT TOP</button>
+		<button class="nodebtn" onclick="moveToNode('33989', this)">Shadow LEFT CENTER</button>
+		<button class="nodebtn" onclick="moveToNode('32763', this)">Shadow RIGHT LJS</button>
+		<button class="nodebtn" onclick="moveToNode('60735', this)">Shadow RIGHT BOTTOM</button>
+		<button class="nodebtn" onclick="moveToNode('34483', this)">Duelist RIGHT TOP</button>
+		<button class="nodebtn" onclick="moveToNode('46882', this)">Duelist RIGHT BOTTOM LJS</button>
+		<button class="nodebtn" onclick="moveToNode('54127', this)">Duelist CENTER</button>
+		<button class="nodebtn" onclick="moveToNode('28475', this)">Duelist LEFT TOP</button>
+		<button class="nodebtn" onclick="moveToNode('2491', this)">Duelist LEFT BOTTOM LJS</button>
+		<button class="nodebtn" onclick="moveToNode('26725', this)">Templar LEFT BOTTOM</button>
+		<button class="nodebtn" onclick="moveToNode('55190', this)">Templar CENTER LEFT LJS</button>
+		<button class="nodebtn" onclick="moveToNode('26196', this)">Templar LEFT TOP</button>
+		<button class="nodebtn" onclick="moveToNode('33631', this)">Templar CENTER RIGHT</button>
+		<button class="nodebtn" onclick="moveToNode('6230', this)">Scion LEFT</button>
+		<button class="nodebtn" onclick="moveToNode('48768', this)">Scion RIGHT</button>
+		<button class="nodebtn" onclick="moveToNode('31683', this)">Scion BOTTOM</button>
+	</div>
+	<div id="ignorefilters" class="sidebars">
+		<table class="filtertable"></table> 
+	</div>
+	<div id="sidebarComboResult" class="sidebars">
+		<button onclick="toggleSidebar()">@</button>
+		<button onclick="toggleComboFilters()">Combo Filters</button><button onclick="copyCombosResultForTrade()">Copy</button>
+		<div id="comboResult"></div>
+	</div>
+	<div id="comboFilters" class="sidebars">
+		<div><button onclick="searchCombos()">SEARCH</button></div>
+	
+		<select id="comboSocketsList"></select><button onclick="addComboSocketFilter()">add</button><button onclick="addAllSockets()">add ALL</button> 
+		
+		<div id="comboSocketsFilterList"></div>
+	
+		<select id="comboSkillsList"></select><input placeholder="1" id="comboSkillAmount" type="text" /><button onclick="addComboSkillFilter()">add</button>
+		
+		<div id="comboSkillsFilterList"></div>
+	</div>
+	
+	<div id="sidebarBestResult" class="sidebars">
+		<button onclick="toggleSidebar()">@</button>
+		<button onclick="toggleBestFilters()">Best Filters</button>
+		<div id="bestResult">&nbsp;</div>
+	</div>
+	<div id="bestFilters" class="sidebars">
+		<div><button onclick="findBest()">SEARCH BEST</button></div>
+		<input type="text" id="bestMinIncreased" value="600"/><label for="bestMinIncreased">Min Increased Damage</label>
+		<div id="bestWeights">&nbsp;</div>
+		<div id="bestSocketsFilter">&nbsp;</div>
+	</div>
+	
+	
+	
+</body>
+<script src="htmllegionjewelsinfo.js"></script>
+<script src="htmlseedinfo.js"></script>
+<script src="normalizedPassiveTree.js"></script>
+<script src="filters.js"></script>
+<script src="combos.js"></script>
+<script src="findBest.js"></script>
+<script src="drawSkillTree.js"></script>
+</html>
