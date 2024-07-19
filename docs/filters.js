@@ -109,7 +109,7 @@ function copySeedForTrade(seed) {
 		}
 	};
 	
-	let copyText = encodeURI(`https://www.pathofexile.com/trade/search/Affliction/?q=${JSON.stringify(s)}`);
+	let copyText = encodeURI(`https://www.pathofexile.com/trade/search/Necropolis/?q=${JSON.stringify(s)}`);
 	navigator.clipboard.writeText(copyText).then(function() {
 		
 	}, function(err) {
