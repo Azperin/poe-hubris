@@ -103,7 +103,7 @@ function copySeedForTrade(seed) {
 				}
 			],
 			"status": {
-				"option": "online"
+				"option": "available"
 			},
 			"type": "Timeless Jewel"
 		}
