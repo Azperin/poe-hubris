@@ -77,22 +77,22 @@ function copySeedForTrade(seed) {
 				{
 					"filters": [
 						{ "disabled": false, "id": "explicit.pseudo_timeless_jewel_victario", "value": {
-						"max": seed,
+						"max": seed + 19,
 						"min": seed
 						} },
 						{ "disabled": false, "id": "explicit.pseudo_timeless_jewel_caspiro", "value": {
-						"max": seed,
+						"max": seed + 19,
 						"min": seed
 						}  },
 						{
 						"disabled": false, "id": "explicit.pseudo_timeless_jewel_cadiro", "value": {
-						"max": seed,
+						"max": seed + 19,
 						"min": seed
 						}
 						},
 						{
 						"disabled": false, "id": "explicit.pseudo_timeless_jewel_chitus", "value": {
-						"max": seed,
+						"max": seed + 19,
 						"min": seed
 						} },
 					],
@@ -109,7 +109,7 @@ function copySeedForTrade(seed) {
 		}
 	};
 	
-	let copyText = encodeURI(`https://www.pathofexile.com/trade/search/Necropolis/?q=${JSON.stringify(s)}`);
+	let copyText = encodeURI(`https://www.pathofexile.com/trade/search/Allflame/?q=${JSON.stringify(s)}`);
 	navigator.clipboard.writeText(copyText).then(function() {
 		
 	}, function(err) {

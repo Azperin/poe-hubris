@@ -122,7 +122,7 @@ function drawSkillTree() {
 			ctx.strokeStyle = diffColors[i] ?? 'black';
 			
 			ctx.font = 'bold 24px serif';
-			ctx.fillText(`${legionjewelsinfo[x].sd['1']}`, textX, textY);
+			ctx.fillText(`${legionjewelsinfo[x]?.sd['1']}`, textX, textY);
 			ctx.font = '12px serif';
 			ctx.fillText(`${legionjewelsinfo[x].name} (${s[x].length})`, textX, textY + 15);
 			
